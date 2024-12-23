@@ -21,7 +21,7 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                className="input input-bordered w-full pl-10 pr-3 py-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input input-bordered w-full pl-10"
                 placeholder="Enter your email"
                 required
               />
@@ -42,7 +42,7 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
-                className="input input-bordered w-full pl-10 pr-3 py-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input input-bordered w-full pl-10"
                 placeholder="Enter your password"
                 required
               />
@@ -52,10 +52,7 @@ const Login = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-          >
+          <button type="submit" className="w-full btn btn-neutral">
             Log in
           </button>
         </form>
@@ -63,10 +60,7 @@ const Login = () => {
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}
-            <a
-              href="/register"
-              className="text-blue-600 font-semibold hover:underline"
-            >
+            <a href="/register" className="font-semibold hover:underline">
               Register
             </a>
           </p>
