@@ -23,6 +23,14 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: (
+      <h1 className="text-center text-red-600 text-4xl font-bold mt-20">
+        Oops! Page not found.
+      </h1>
+    ),
+  },
 ]);
 
 export default router;

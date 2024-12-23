@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <div className="md:bg-base-200 flex items-center justify-center min-h-screen">
+    <div className="md:bg-base-200 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full my-4">
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
           Create an Account

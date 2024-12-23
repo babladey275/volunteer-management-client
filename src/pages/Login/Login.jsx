@@ -3,7 +3,7 @@ import { FaLock, FaUserAlt } from "react-icons/fa";
 
 const Login = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center py-10 bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
           Login Your Account
