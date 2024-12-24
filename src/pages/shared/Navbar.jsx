@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { signOut } from "firebase/auth";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
@@ -14,6 +13,24 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to={"/my-applications"}>All volunteer Need posts</NavLink>
+      </li>
+      <li>
+        <div className="dropdown dropdown-bottom">
+          <div tabIndex={0} role="button" className="">
+            My Profile
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+          >
+            <li>
+              <Link to="/add-volunteer-post">Add Volunteer need Post</Link>
+            </li>
+            <li>
+              <Link to="/manage-my-posts">Manage My Posts </Link>
+            </li>
+          </ul>
+        </div>
       </li>
     </>
   );

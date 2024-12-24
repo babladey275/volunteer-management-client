@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
+import SocialLogin from "../shared/SocialLogin";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser } = useAuth();
@@ -126,6 +127,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

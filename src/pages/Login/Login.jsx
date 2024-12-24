@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaLock, FaUserAlt } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialLogin from "../shared/SocialLogin";
 
 const Login = () => {
   const { loginUser } = useAuth();
@@ -89,6 +90,7 @@ const Login = () => {
             </a>
           </p>
         </div>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );
