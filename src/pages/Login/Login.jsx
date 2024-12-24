@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaLock, FaUserAlt } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { loginUser } = useAuth();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    loginUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: err.message || "Something went wrong. Please try again.",
+          confirmButtonText: "Ok",
+        });
+      });
+  };
+
   return (
     <div className="flex justify-center items-center py-10 bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -9,7 +33,7 @@ const Login = () => {
           Login Your Account
         </h2>
 
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
               htmlFor="email"
