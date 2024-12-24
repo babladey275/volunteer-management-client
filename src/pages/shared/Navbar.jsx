@@ -1,18 +1,27 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-
-const links = (
-  <>
-    <li>
-      <NavLink to={"/"}>Home</NavLink>
-    </li>
-    <li>
-      <NavLink to={"/my-applications"}>All volunteer Need posts</NavLink>
-    </li>
-  </>
-);
+import useAuth from "../../hooks/useAuth";
+import { signOut } from "firebase/auth";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  const links = (
+    <>
+      <li>
+        <NavLink to={"/"}>Home</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/my-applications"}>All volunteer Need posts</NavLink>
+      </li>
+    </>
+  );
+
+  const handleLogOut = () => {
+    logOut();
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -48,9 +57,27 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link to={"/login"} className="btn btn-neutral">
-          Sign In
-        </Link>
+        {user && user?.email ? (
+          <div className="flex items-center gap-6">
+            <div className="relative flex flex-col items-center">
+              <img
+                src={user.photoURL}
+                className="w-8 h-8 rounded-full"
+                alt="User Avatar"
+                data-tooltip-id="user-tooltip"
+                data-tooltip-place="left"
+              />
+              <Tooltip id="user-tooltip" content={user.displayName || "User"} />
+            </div>
+            <Link onClick={handleLogOut} className="btn btn-neutral">
+              Log Out
+            </Link>
+          </div>
+        ) : (
+          <Link to={"/login"} className="btn btn-neutral">
+            Sign In
+          </Link>
+        )}
       </div>
     </div>
   );

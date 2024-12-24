@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
     console.log({ name, photo, email, password });
@@ -17,10 +19,35 @@ const Register = () => {
     //authentication
     createUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        setUser(result.user);
+
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Registration Successful!",
+              text: "You have successfully registered!",
+              confirmButtonText: "OK",
+            }).then(() => {
+              navigate("/");
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Profile Update Failed",
+              text: `Profile update failed: ${error.message}`,
+              confirmButtonText: "OK",
+            });
+          });
       })
       .catch((error) => {
-        console.log(error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: `Registration failed: ${error.message}`,
+          confirmButtonText: "OK",
+        });
       });
   };
   return (
