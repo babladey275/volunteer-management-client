@@ -1,7 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
+  const { createUser } = useAuth();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({ name, photo, email, password });
+
+    //authentication
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <div className="md:bg-base-200 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full my-4">
@@ -9,7 +30,7 @@ const Register = () => {
           Create an Account
         </h2>
 
-        <form>
+        <form onSubmit={handleRegister}>
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Full Name</span>
