@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser } = useAuth();
@@ -15,6 +16,22 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log({ name, photo, email, password });
+
+    //password validation
+    let errorMessage = null;
+
+    if (!/[A-Z]/.test(password)) {
+      errorMessage = "Password must contain at least one uppercase letter.";
+    } else if (!/[a-z]/.test(password)) {
+      errorMessage = "Password must contain at least one lowercase letter.";
+    } else if (password.length < 6) {
+      errorMessage = "Password must be at least 6 characters long.";
+    }
+
+    if (errorMessage) {
+      toast.error(errorMessage);
+      return;
+    }
 
     //authentication
     createUser(email, password)
@@ -33,21 +50,11 @@ const Register = () => {
             });
           })
           .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Profile Update Failed",
-              text: `Profile update failed: ${error.message}`,
-              confirmButtonText: "OK",
-            });
+            toast.error(`Profile update failed: ${error.message}`);
           });
       })
       .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Registration Failed",
-          text: `Registration failed: ${error.message}`,
-          confirmButtonText: "OK",
-        });
+        toast.error(`Registration failed: ${error.message}`);
       });
   };
   return (
@@ -56,6 +63,7 @@ const Register = () => {
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
           Create an Account
         </h2>
+        <Toaster></Toaster>
 
         <form onSubmit={handleRegister}>
           <div className="form-control">
