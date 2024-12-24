@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
+import logo from "../../assets/icon/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -67,6 +68,7 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="btn btn-ghost hover:bg-white">
+          <img src={logo} alt="" className="w-12 hidden md:block" />
           <h2 className="text-2xl hidden md:block">Volunteer Wave</h2>
         </a>
       </div>
