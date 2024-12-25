@@ -1,11 +1,12 @@
 import React from "react";
 import { FaCalendarAlt, FaLocationArrow, FaUsers } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const VolunteerPostDetails = () => {
   const data = useLoaderData();
 
   const {
+    _id,
     thumbnail,
     title,
     category,
@@ -65,10 +66,7 @@ const VolunteerPostDetails = () => {
           <p className="text-gray-700 mt-3">Organizer: {name}</p>
           <p className="text-gray-700">
             Email:{" "}
-            <a
-              href={`mailto:${email}`}
-              className="text-blue-500 hover:text-blue-700 transition duration-200"
-            >
+            <a className="text-blue-500 hover:text-blue-700 transition duration-200">
               {email}
             </a>
           </p>
@@ -76,7 +74,9 @@ const VolunteerPostDetails = () => {
 
         {/* Be a Volunteer Button */}
         <div className="flex justify-center mt-8">
-          <button className="btn btn-primary w-full">Be a Volunteer</button>
+          <Link to={`/beVolunteer/${_id}`} className="btn btn-primary w-full">
+            Be a Volunteer
+          </Link>
         </div>
       </div>
     </div>
