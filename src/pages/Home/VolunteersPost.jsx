@@ -16,9 +16,9 @@ const VolunteersPost = () => {
   }, []);
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-10">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
       {volunteers.map((item) => (
-        <VolunteersPostCard item={item}></VolunteersPostCard>
+        <VolunteersPostCard item={item} key={item._id}></VolunteersPostCard>
       ))}
     </div>
   );

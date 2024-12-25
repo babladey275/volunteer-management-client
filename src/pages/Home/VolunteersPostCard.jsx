@@ -20,8 +20,8 @@ const VolunteersPostCard = ({ item }) => {
           </p>
         </div>
         <div className="card-actions justify-end">
-          <Link>
-            <button className="btn btn-outline">Explore Details</button>
+          <Link to={`/volunteers/${_id}`}>
+            <button className="btn btn-outline">View Details</button>
           </Link>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import AddVolunteerPost from "../pages/AddVolunteerPost/AddVolunteerPost";
+import VolunteerPostDetails from "../pages/VolunteerPostDetails/VolunteerPostDetails";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,16 @@ const router = createBrowserRouter([
             <AddVolunteerPost></AddVolunteerPost>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "volunteers/:id",
+        element: (
+          <PrivateRoute>
+            <VolunteerPostDetails></VolunteerPostDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/volunteers/${params.id}`),
       },
       {
         path: "register",
