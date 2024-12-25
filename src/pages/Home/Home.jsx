@@ -1,9 +1,10 @@
 import React from "react";
+import VolunteersPost from "./VolunteersPost";
 
 const Home = () => {
   return (
     <div>
-      <h2 className="text-4xl">this is home</h2>
+      <VolunteersPost></VolunteersPost>
     </div>
   );
 };
