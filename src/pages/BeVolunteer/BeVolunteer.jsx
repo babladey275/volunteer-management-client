@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const BeVolunteer = () => {
   const data = useLoaderData();
   const { user } = useAuth();
+  const [volunteersLeft, setVolunteersLeft] = useState(data.noOfVolunteers);
 
   const {
     _id,
@@ -14,7 +15,6 @@ const BeVolunteer = () => {
     category,
     description,
     location,
-    noOfVolunteers,
     deadline,
     name,
     email,
@@ -45,7 +45,7 @@ const BeVolunteer = () => {
             title: "Your request has been submitted!",
             showConfirmButton: false,
             timer: 2000,
-          });
+          }).then(() => setVolunteersLeft(volunteersLeft - 1));
         }
       });
   };
@@ -114,7 +114,7 @@ const BeVolunteer = () => {
               <input
                 name="noOfVolunteers"
                 type="number"
-                value={noOfVolunteers}
+                value={volunteersLeft}
                 readOnly
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100"
               />
