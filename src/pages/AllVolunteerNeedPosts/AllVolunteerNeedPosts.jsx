@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
 const AllVolunteerNeedPosts = () => {
   const posts = useLoaderData();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <div>
+      <div>
+        <h1 className="text-3xl font-bold text-center my-6">
+          Volunteer Opportunities
+        </h1>
+        <p className="text-center text-lg mb-6">
+          Find volunteer opportunities that match your interests and skills.
+        </p>
+      </div>
+      {/* Search Input */}
+      <div className="mt-8 mb-4 mr-8 text-right">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search by post title..."
+          className="input input-bordered border-2 w-full md:w-1/3 lg:w-1/4 mx-auto"
+        />
+      </div>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <div key={post._id} className="card w-full bg-base-100 border">
             <div className="card-body p-5">
               <img
