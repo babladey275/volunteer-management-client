@@ -13,7 +13,9 @@ const Navbar = () => {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/my-applications"}>All volunteer Need posts</NavLink>
+        <NavLink to={"/all-volunteer-need-posts"}>
+          All volunteer Need posts
+        </NavLink>
       </li>
       <li>
         <div className="dropdown dropdown-bottom">
