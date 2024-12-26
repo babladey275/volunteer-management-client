@@ -29,13 +29,16 @@ const BeVolunteer = () => {
 
     // console.log(initialData);
 
-    fetch("http://localhost:5000/volunteer-request", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(initialData),
-    })
+    fetch(
+      "https://volunteer-management-server-gilt.vercel.app/volunteer-request",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(initialData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

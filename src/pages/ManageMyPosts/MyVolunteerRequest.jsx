@@ -28,9 +28,12 @@ const MyVolunteerRequest = () => {
           prevRequests.filter((request) => request._id !== id)
         );
 
-        fetch(`http://localhost:5000/volunteer-request/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://volunteer-management-server-gilt.vercel.app/volunteer-request/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);

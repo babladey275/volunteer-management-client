@@ -9,7 +9,9 @@ const MyVolunteerNeedPost = () => {
   const [volunteersNeed, setVolunteersNeed] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-volunteers?email=${user.email}`)
+    fetch(
+      `https://volunteer-management-server-gilt.vercel.app/my-volunteers?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setVolunteersNeed(data));
   }, [user.email]);
@@ -28,12 +30,15 @@ const MyVolunteerNeedPost = () => {
           prevVolunteers.filter((volunteers) => volunteers._id !== id)
         );
 
-        fetch(`http://localhost:5000/volunteers-need/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://volunteer-management-server-gilt.vercel.app/volunteers-need/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",

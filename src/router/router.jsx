@@ -23,7 +23,10 @@ const router = createBrowserRouter([
       {
         path: "all-volunteer-need-posts",
         element: <AllVolunteerNeedPosts></AllVolunteerNeedPosts>,
-        loader: () => fetch("http://localhost:5000/volunteers"),
+        loader: () =>
+          fetch(
+            "https://volunteer-management-server-gilt.vercel.app/volunteers"
+          ),
       },
       {
         path: "add-volunteer-post",
@@ -41,7 +44,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/volunteers/${params.id}`),
+          fetch(
+            `https://volunteer-management-server-gilt.vercel.app/volunteers/${params.id}`
+          ),
       },
       {
         path: "beVolunteer/:id",
@@ -51,7 +56,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/volunteers/${params.id}`),
+          fetch(
+            `https://volunteer-management-server-gilt.vercel.app/volunteers/${params.id}`
+          ),
       },
       {
         path: "manage-my-posts",
@@ -69,7 +76,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/volunteers/${params.id}`),
+          fetch(
+            `https://volunteer-management-server-gilt.vercel.app/volunteers/${params.id}`
+          ),
       },
       {
         path: "register",

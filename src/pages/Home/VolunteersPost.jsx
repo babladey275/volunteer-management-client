@@ -7,7 +7,7 @@ const VolunteersPost = () => {
   const [volunteers, setVolunteers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/volunteers")
+    fetch("https://volunteer-management-server-gilt.vercel.app/volunteers")
       .then((res) => res.json())
       .then((data) => {
         const sortedData = data

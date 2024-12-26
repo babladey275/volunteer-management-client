@@ -15,7 +15,7 @@ const Login = () => {
 
     loginUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
       })
       .catch((err) => {
         Swal.fire({

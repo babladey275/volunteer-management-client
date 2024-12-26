@@ -15,7 +15,7 @@ const AddVolunteerPost = () => {
     initialData.noOfVolunteers = Number(initialData.noOfVolunteers);
     // console.log(initialData);
 
-    fetch("http://localhost:5000/volunteers", {
+    fetch("https://volunteer-management-server-gilt.vercel.app/volunteers", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -24,7 +24,7 @@ const AddVolunteerPost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             position: "top",

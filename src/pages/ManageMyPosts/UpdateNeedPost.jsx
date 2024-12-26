@@ -27,13 +27,16 @@ const UpdateNeedPost = () => {
     const initialData = Object.fromEntries(formData.entries());
 
     //send update data to the server
-    fetch(`http://localhost:5000/volunteers-need/${_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(initialData),
-    })
+    fetch(
+      `https://volunteer-management-server-gilt.vercel.app/volunteers-need/${_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(initialData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
