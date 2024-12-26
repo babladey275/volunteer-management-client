@@ -1,21 +1,34 @@
 import React, { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
-const AddVolunteerPost = () => {
-  const [startDate, setStartDate] = useState(new Date());
+const UpdateNeedPost = () => {
   const { user } = useAuth();
+  const data = useLoaderData();
+  const {
+    _id,
+    thumbnail,
+    title,
+    description,
+    category,
+    location,
+    noOfVolunteers,
+    deadline,
+  } = data;
 
-  const handleAddPost = (e) => {
+  const [startDate, setStartDate] = useState(new Date(deadline));
+
+  const submitUpdate = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
-    // console.log(initialData);
 
-    fetch("http://localhost:5000/volunteers", {
-      method: "POST",
+    //send update data to the server
+    fetch(`http://localhost:5000/volunteers-need/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -23,14 +36,12 @@ const AddVolunteerPost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
-            position: "top",
+            title: "Success!",
+            text: "Volunteer post updated successfully!",
             icon: "success",
-            title: "Your volunteer post successfully added!",
-            showConfirmButton: false,
-            timer: 3000,
+            confirmButtonText: "Ok",
           });
         }
       });
@@ -38,17 +49,18 @@ const AddVolunteerPost = () => {
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md border-2 space-y-6 my-8">
-      <h2 className="text-2xl md:text-4xl font-semibold text-center">
-        Add Volunteer Need Post
+      <h2 className="text-2xl md:text-3xl font-semibold text-center">
+        Update Your Volunteer Need Post
       </h2>
 
-      <form onSubmit={handleAddPost} className="space-y-6">
+      <form onSubmit={submitUpdate} className="space-y-6">
         {/* Thumbnail */}
         <div>
           <label className="block text-sm font-medium">Thumbnail</label>
           <input
             type="url"
             name="thumbnail"
+            defaultValue={thumbnail}
             placeholder="Enter thumbnail URL"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             required
@@ -61,6 +73,7 @@ const AddVolunteerPost = () => {
           <input
             type="text"
             name="title"
+            defaultValue={title}
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Enter post title"
             required
@@ -72,6 +85,7 @@ const AddVolunteerPost = () => {
           <label className="block text-sm font-medium">Description</label>
           <textarea
             name="description"
+            defaultValue={description}
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Enter description"
             rows="4"
@@ -83,7 +97,7 @@ const AddVolunteerPost = () => {
         <div>
           <label className="block text-sm font-medium">Category</label>
           <select
-            defaultValue=""
+            defaultValue={category}
             name="category"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             required
@@ -104,6 +118,7 @@ const AddVolunteerPost = () => {
           <input
             type="text"
             name="location"
+            defaultValue={location}
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Enter location"
             required
@@ -120,6 +135,7 @@ const AddVolunteerPost = () => {
             <input
               type="number"
               name="noOfVolunteers"
+              defaultValue={noOfVolunteers}
               className="mt-2 p-2 border border-gray-300 rounded w-full"
               placeholder="Enter number of volunteers"
               min="1"
@@ -172,11 +188,12 @@ const AddVolunteerPost = () => {
         {/* Add Post Button */}
         <div>
           <button type="submit" className="w-full btn btn-primary">
-            Add Post
+            Update Post
           </button>
         </div>
       </form>
     </div>
   );
 };
-export default AddVolunteerPost;
+
+export default UpdateNeedPost;

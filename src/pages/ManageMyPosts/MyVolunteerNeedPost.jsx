@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyVolunteerNeedPost = () => {
   const { user } = useAuth();
@@ -74,12 +75,11 @@ const MyVolunteerNeedPost = () => {
                     <td>{post.category}</td>
                     <td>{post.deadline}</td>
                     <td>
-                      <button
-                        // onClick={() => handleUpdate(post._id)}
-                        className="btn btn-accent btn-xs mr-4"
-                      >
-                        <FaEdit />
-                      </button>
+                      <Link to={`/volunteers-need/${post._id}`}>
+                        <button className="btn btn-accent btn-xs mr-4">
+                          <FaEdit />
+                        </button>
+                      </Link>
                       <button
                         onClick={() => handleDelete(post._id)}
                         className="btn btn-error btn-xs"
