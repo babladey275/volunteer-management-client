@@ -1,10 +1,16 @@
 import React from "react";
 import VolunteersPost from "./VolunteersPost";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
     <div>
-      <VolunteersPost></VolunteersPost>
+      <section>
+        <Banner></Banner>
+      </section>
+      <section>
+        <VolunteersPost></VolunteersPost>
+      </section>
     </div>
   );
 };
