@@ -1,9 +1,40 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const AddVolunteerPost = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const { user } = useAuth();
+
+  const handleAddPost = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const initialData = Object.fromEntries(formData.entries());
+    console.log(initialData);
+
+    fetch("http://localhost:5000/volunteers", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(initialData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Your volunteer post successfully added!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
+      });
+  };
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md border-2 space-y-6 my-8">
@@ -11,12 +42,13 @@ const AddVolunteerPost = () => {
         Add Volunteer Need Post
       </h2>
 
-      <form className="space-y-6">
+      <form onSubmit={handleAddPost} className="space-y-6">
         {/* Thumbnail */}
         <div>
           <label className="block text-sm font-medium">Thumbnail</label>
           <input
             type="url"
+            name="thumbnail"
             placeholder="Enter thumbnail URL"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             required
@@ -28,6 +60,7 @@ const AddVolunteerPost = () => {
           <label className="block text-sm font-medium">Post Title</label>
           <input
             type="text"
+            name="title"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Enter post title"
             required
@@ -38,6 +71,7 @@ const AddVolunteerPost = () => {
         <div>
           <label className="block text-sm font-medium">Description</label>
           <textarea
+            name="description"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Enter description"
             rows="4"
@@ -50,6 +84,7 @@ const AddVolunteerPost = () => {
           <label className="block text-sm font-medium">Category</label>
           <select
             defaultValue=""
+            name="category"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             required
           >
@@ -68,6 +103,7 @@ const AddVolunteerPost = () => {
           <label className="block text-sm font-medium">Location</label>
           <input
             type="text"
+            name="location"
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Enter location"
             required
@@ -83,6 +119,7 @@ const AddVolunteerPost = () => {
             </label>
             <input
               type="number"
+              name="noOfVolunteers"
               className="mt-2 p-2 border border-gray-300 rounded w-full"
               placeholder="Enter number of volunteers"
               min="1"
@@ -95,6 +132,7 @@ const AddVolunteerPost = () => {
             <label className="block text-sm font-medium mb-2">Deadline</label>
             <span>
               <DatePicker
+                name="deadline"
                 showIcon
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -110,6 +148,8 @@ const AddVolunteerPost = () => {
           <label className="block text-sm font-medium">Organizer Name</label>
           <input
             type="text"
+            name="name"
+            value={user.displayName}
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Organizer Name"
             readOnly
@@ -121,6 +161,8 @@ const AddVolunteerPost = () => {
           <label className="block text-sm font-medium">Organizer Email</label>
           <input
             type="email"
+            name="email"
+            value={user.email}
             className="mt-2 p-2 border border-gray-300 rounded w-full"
             placeholder="Organizer Email"
             readOnly
