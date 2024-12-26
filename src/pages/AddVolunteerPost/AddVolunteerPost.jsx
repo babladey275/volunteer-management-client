@@ -12,6 +12,7 @@ const AddVolunteerPost = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
+    initialData.noOfVolunteers = Number(initialData.noOfVolunteers);
     // console.log(initialData);
 
     fetch("http://localhost:5000/volunteers", {

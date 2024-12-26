@@ -74,9 +74,15 @@ const VolunteerPostDetails = () => {
 
         {/* Be a Volunteer Button */}
         <div className="flex justify-center mt-8">
-          <Link to={`/beVolunteer/${_id}`} className="btn btn-primary w-full">
-            Be a Volunteer
-          </Link>
+          {noOfVolunteers === 0 ? (
+            <p className="text-lg text-red-500 font-semibold">
+              No volunteers needed at the moment.
+            </p>
+          ) : (
+            <Link to={`/beVolunteer/${_id}`} className="btn btn-primary w-full">
+              Be a Volunteer
+            </Link>
+          )}
         </div>
       </div>
     </div>
