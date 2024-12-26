@@ -45,7 +45,7 @@ const MyVolunteerRequest = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto border shadow-xl rounded-lg my-10 p-10">
       <h2 className="text-2xl md:text-4xl text-center font-semibold my-6">
         My Volunteer Request Posts: {volunteerRequest.length}
       </h2>

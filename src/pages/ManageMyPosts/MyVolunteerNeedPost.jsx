@@ -1,9 +1,99 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const MyVolunteerNeedPost = () => {
+  const { user } = useAuth();
+  const [volunteersNeed, setVolunteersNeed] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/my-volunteers?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setVolunteersNeed(data));
+  }, [user.email]);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this action!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, cancel it!",
+      cancelButtonText: "No, keep it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setVolunteersNeed((prevVolunteers) =>
+          prevVolunteers.filter((volunteers) => volunteers._id !== id)
+        );
+
+        fetch(`http://localhost:5000/volunteers-need/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your volunteer need post has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
+
   return (
-    <div>
-      <h2 className="text-4xl">My Volunteer Need Post</h2>
+    <div className="max-w-6xl mx-auto mt-8 border shadow-xl rounded-lg">
+      <h2 className="text-2xl md:text-4xl text-center font-semibold my-6">
+        My Volunteer Need Post: {volunteersNeed.length}
+      </h2>
+
+      <div className="p-10">
+        {volunteersNeed.length === 0 ? (
+          <div className="text-center text-xl font-medium text-gray-600 mb-10">
+            <p>No volunteer need posts found. You can create a new one!</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Deadline</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {volunteersNeed.map((post) => (
+                  <tr key={post._id}>
+                    <td>{post.title}</td>
+                    <td>{post.category}</td>
+                    <td>{post.deadline}</td>
+                    <td>
+                      <button
+                        // onClick={() => handleUpdate(post._id)}
+                        className="btn btn-accent btn-xs mr-4"
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(post._id)}
+                        className="btn btn-error btn-xs"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
