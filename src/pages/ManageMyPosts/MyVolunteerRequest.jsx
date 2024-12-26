@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyVolunteerRequest = () => {
   const { user } = useAuth();
   const [volunteerRequest, setVolunteerRequest] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/volunteer-request?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setVolunteerRequest(data));
+    axiosSecure
+      .get(`/volunteer-request?email=${user.email}`)
+      .then((res) => setVolunteerRequest(res.data));
   }, [user.email]);
 
   const handleCancel = (id) => {
