@@ -6,7 +6,7 @@ import Footer from "../pages/shared/Footer";
 const MainLayout = () => {
   return (
     <div className="max-w-7xl mx-auto">
-      <header>
+      <header className=" sticky top-0 z-50">
         <Navbar></Navbar>
       </header>
       <main className="min-h-[calc(100vh-288px)] ">
