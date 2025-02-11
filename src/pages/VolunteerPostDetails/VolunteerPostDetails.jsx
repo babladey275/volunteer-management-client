@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { FaCalendarAlt, FaLocationArrow, FaUsers } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
 
@@ -20,6 +21,9 @@ const VolunteerPostDetails = () => {
 
   return (
     <div className="bg-base-100 py-12">
+      <Helmet>
+        <title>Volunteer Wave | Volunteer Post Details</title>
+      </Helmet>
       <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
         {/* Program Thumbnail */}
         <div className="mb-8 rounded-lg overflow-hidden shadow-md">

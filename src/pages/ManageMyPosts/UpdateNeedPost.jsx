@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const UpdateNeedPost = () => {
   const { user } = useAuth();
@@ -52,6 +53,9 @@ const UpdateNeedPost = () => {
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md border-2 space-y-6 my-8">
+      <Helmet>
+        <title>Volunteer Wave | Update Post</title>
+      </Helmet>
       <h2 className="text-2xl md:text-3xl font-semibold text-center">
         Update Your Volunteer Need Post
       </h2>

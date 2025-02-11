@@ -1,19 +1,20 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SocialLogin = () => {
   const { signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
         if (user) {
-          navigate("/");
+          navigate(location.state || "/");
         }
       })
       .catch((error) => {
@@ -33,7 +34,6 @@ const SocialLogin = () => {
         </span>
         Sign in With Google
       </button>
-      <Toaster></Toaster>
     </div>
   );
 };

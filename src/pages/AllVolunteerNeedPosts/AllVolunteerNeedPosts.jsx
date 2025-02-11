@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
 
 const AllVolunteerNeedPosts = () => {
@@ -15,6 +16,9 @@ const AllVolunteerNeedPosts = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Volunteer Wave | All Volunteer Need Post</title>
+      </Helmet>
       <div>
         <h1 className="text-3xl font-bold text-center my-6">
           Volunteer Opportunities

@@ -2,8 +2,9 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import toast, { Toaster } from "react-hot-toast";
 import SocialLogin from "../shared/SocialLogin";
+import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser } = useAuth();
@@ -58,77 +59,81 @@ const Register = () => {
       });
   };
   return (
-    <div className="md:bg-base-200 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full my-4">
-        <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-          Create an Account
-        </h2>
-        <Toaster></Toaster>
+    <>
+      <Helmet>
+        <title>Volunteer Wave | Register</title>
+      </Helmet>
+      <div className="md:bg-base-200 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full my-4">
+          <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
+            Create an Account
+          </h2>
 
-        <form onSubmit={handleRegister}>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-semibold">Full Name</span>
-            </label>
-            <input
-              name="name"
-              type="text"
-              placeholder="Enter your full name"
-              className="input input-bordered"
-              required
-            />
+          <form onSubmit={handleRegister}>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Full Name</span>
+              </label>
+              <input
+                name="name"
+                type="text"
+                placeholder="Enter your full name"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Photo URL</span>
+              </label>
+              <input
+                name="photo"
+                type="text"
+                placeholder="Enter your photo URL"
+                className="input input-bordered rounded-sm"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Email</span>
+              </label>
+              <input
+                name="email"
+                type="email"
+                placeholder="Enter your email address"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Password</span>
+              </label>
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control mt-6">
+              <button className="btn btn-neutral">Register</button>
+            </div>
+          </form>
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              Already Have An Account?{" "}
+              <Link to={"/login"} className="font-semibold hover:underline">
+                Sign in
+              </Link>
+            </p>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-semibold">Photo URL</span>
-            </label>
-            <input
-              name="photo"
-              type="text"
-              placeholder="Enter your photo URL"
-              className="input input-bordered rounded-sm"
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-semibold">Email</span>
-            </label>
-            <input
-              name="email"
-              type="email"
-              placeholder="Enter your email address"
-              className="input input-bordered"
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-semibold">Password</span>
-            </label>
-            <input
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              className="input input-bordered"
-              required
-            />
-          </div>
-          <div className="form-control mt-6">
-            <button className="btn btn-neutral">Register</button>
-          </div>
-        </form>
-        <div className="text-center mt-4">
-          <p className="text-sm text-gray-600">
-            Already Have An Account?{" "}
-            <Link to={"/login"} className="font-semibold hover:underline">
-              Sign in
-            </Link>
-          </p>
+          <SocialLogin></SocialLogin>
         </div>
-        <SocialLogin></SocialLogin>
       </div>
-    </div>
+    </>
   );
 };
 

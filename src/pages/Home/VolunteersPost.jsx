@@ -19,6 +19,11 @@ const VolunteersPost = () => {
 
   return (
     <div>
+      <div className="text-center my-6">
+        <h2 className="text-3xl font-bold text-gray-900">
+          Upcoming Volunteer Opportunities
+        </h2>
+      </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 my-10">
         {volunteers.map((item) => (
           <VolunteersPostCard item={item} key={item._id}></VolunteersPostCard>
