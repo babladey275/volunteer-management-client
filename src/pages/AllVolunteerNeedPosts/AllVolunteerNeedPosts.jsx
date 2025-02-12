@@ -60,7 +60,9 @@ const AllVolunteerNeedPosts = () => {
               </div>
               <div className="card-actions justify-end">
                 <Link to={`/volunteers/${post._id}`}>
-                  <button className="btn btn-outline">View Details</button>
+                  <button className="btn bg-[#2985b4] hover:bg-[#275C87] text-white">
+                    View Details
+                  </button>
                 </Link>
               </div>
             </div>
