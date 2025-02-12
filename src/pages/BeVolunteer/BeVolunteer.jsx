@@ -245,7 +245,7 @@ const BeVolunteer = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="btn btn-primary w-full py-2 px-4 rounded-lg text-white bg-blue-500 hover:bg-blue-600"
+              className="btn btn-primary w-full py-2 px-4 rounded-lg bg-[#2985b4] hover:bg-[#275C87] text-white"
             >
               Request
             </button>

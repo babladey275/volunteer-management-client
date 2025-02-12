@@ -83,7 +83,10 @@ const VolunteerPostDetails = () => {
               No volunteers needed at the moment.
             </p>
           ) : (
-            <Link to={`/beVolunteer/${_id}`} className="btn btn-primary w-full">
+            <Link
+              to={`/beVolunteer/${_id}`}
+              className="btn bg-[#2985b4] hover:bg-[#275C87] text-white w-full"
+            >
               Be a Volunteer
             </Link>
           )}

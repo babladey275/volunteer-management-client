@@ -19,8 +19,8 @@ const VolunteersPost = () => {
 
   return (
     <div>
-      <div className="text-center my-6">
-        <h2 className="text-3xl font-bold text-gray-900">
+      <div className="text-center my-6 md:my-10">
+        <h2 className="md:text-3xl text-xl font-bold text-gray-700">
           Upcoming Volunteer Opportunities
         </h2>
       </div>
@@ -29,10 +29,10 @@ const VolunteersPost = () => {
           <VolunteersPostCard item={item} key={item._id}></VolunteersPostCard>
         ))}
       </div>
-      <div className="flex justify-end mr-8 -mt-5 mb-10">
+      <div className="flex justify-center mr-8 -mt-5 mb-10">
         <Link to={"/all-volunteer-need-posts"}>
-          <button className="btn btn-warning">
-            <FaLongArrowAltRight /> See all
+          <button className="btn bg-[#2985b4] hover:bg-[#275C87] text-white md:text-xl">
+            See all <FaLongArrowAltRight />
           </button>
         </Link>
       </div>

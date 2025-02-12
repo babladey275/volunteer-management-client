@@ -177,7 +177,10 @@ const AddVolunteerPost = () => {
 
           {/* Add Post Button */}
           <div>
-            <button type="submit" className="w-full btn btn-primary">
+            <button
+              type="submit"
+              className="w-full btn bg-[#2985b4] hover:bg-[#275C87] text-white"
+            >
               Add Post
             </button>
           </div>
